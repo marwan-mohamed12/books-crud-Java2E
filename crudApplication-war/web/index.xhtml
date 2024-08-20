@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Books</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    
+    <h:body>
+        <h1>Books Crud</h1>
+        <h:form>
+            <h:panelGrid columns="12" cellpadding="5">
+                <h:outputText value="Title" /><p:inputText value="#{bookBB.title}"/>
+                <h:outputText value="Author " /><p:inputText value="#{bookBB.author}" />
+                <h:outputText value="Category " /><p:inputText value="#{bookBB.genre}"/>
+                <h:outputText value="Year" /><p:inputText value="#{bookBB.publicationYear}"/>
+                <h:outputText value="Price " /><p:inputText value="#{bookBB.price}"/>
+                <p:commandButton value="Add" icon="fa fa-fw fa-plus" action="#{bookBB.add()}"/>
+            </h:panelGrid>
+        </h:form>
+
+        <h:form id="form">
+            <p:dataTable value="#{bookBB.getAllBooks()}" var="book" style="margin: 2em;" rowKey="#{book.bookid}">
+                <p:column headerText="Name">
+                    <h:outputText value="#{book.title}"/>
+                </p:column>
+
+                <p:column headerText="Year">
+                    <h:outputText value="#{book.publicationyear}"/>
+                </p:column>
+
+                <p:column headerText="Author">
+                    <h:outputText value="#{book.author}"/>
+                </p:column>
+
+                <p:column headerText="Category">
+                    <h:outputText value="#{book.genre}"/>
+                </p:column>
+
+                <p:column headerText="Price">
+                    <h:outputText value="$#{book.price}"/>
+                </p:column>
+
+                <p:column style="width:100px;text-align: center">
+                    <p:commandButton icon="fa fa-pencil" update=":form:bookEdit" oncomplete="PF('editDialog').show()">
+                        <f:setPropertyActionListener value="#{book}" target="#{bookBB.selectedBook}"/>
+                    </p:commandButton>
+                    <p:commandButton action="#{bookBB.deleteBook(book)}" icon="fa fa-trash"></p:commandButton>
+                </p:column>
+            </p:dataTable>
+
+            <p:dialog header="Edit Book" widgetVar="editDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="bookEdit" style="text-align:center;">
+                    <p:panelGrid columns="2" rendered="#{not empty bookBB.selectedBook}" columnClasses="label,value">
+                        
+                        <h:outputText value="Name: " /><p:inputText value="#{bookBB.selectedBook.title}" />
+
+                        <h:outputText value="Category: " /><p:inputText value="#{bookBB.selectedBook.genre}" />
+
+                        <h:outputText value="Author: " /><p:inputText value="#{bookBB.selectedBook.author}"/>
+
+                        <h:outputText value="Price: $" /><p:inputText value="#{bookBB.selectedBook.price}" />
+
+                        <h:outputText value="Year: " /><p:inputText value="#{bookBB.selectedBook.publicationyear}" />
+                        
+                    </p:panelGrid>
+
+                    <p:commandButton value="Update" icon="fa fa-fw fa-pencil" action="#{bookBB.updateBook()}"/>
+                </p:outputPanel>
+            </p:dialog>
+            
+        </h:form>
+
+    </h:body>
+</html>
+
+

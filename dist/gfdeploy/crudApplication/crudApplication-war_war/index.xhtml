@@ -14,40 +14,40 @@
         <h1>Books Crud</h1>
         <h:form>
             <h:panelGrid columns="12" cellpadding="5">
-                <h:outputText value="Title" /><p:inputText value="#{bookBB.title}"/>
-                <h:outputText value="Author " /><p:inputText value="#{bookBB.author}" />
-                <h:outputText value="Category " /><p:inputText value="#{bookBB.genre}"/>
-                <h:outputText value="Year" /><p:inputText value="#{bookBB.publicationYear}"/>
-                <h:outputText value="Price " /><p:inputText value="#{bookBB.price}"/>
-                <p:commandButton value="Add" icon="fa fa-fw fa-plus" action="#{bookBB.add()}"/>
+                <h:outputText value="Name" /><p:inputText value="#{bookBB.book.name}"/>
+                <h:outputText value="Author " /><p:inputText value="#{bookBB.book.author}" />
+                <h:outputText value="Category " /><p:inputText value="#{bookBB.book.category}"/>
+                <h:outputText value="Year" /><p:inputText value="#{bookBB.book.year}"/>
+                <h:outputText value="Price " /><p:inputText value="#{bookBB.book.price}"/>
+                <p:commandButton value="Add" icon="pi pi-check" action="#{bookBB.add()}"/>
             </h:panelGrid>
         </h:form>
 
         <h:form id="form">
-            <p:dataTable value="#{bookBB.getAllBooks()}" var="book" style="margin: 2em;" rowKey="#{book.bookid}">
+            <p:dataTable value="#{bookBB.getAllBooks()}" var="book" style="margin: 2em;" rowKey="#{bookBB.book.id}">
                 <p:column headerText="Name">
-                    <h:outputText value="#{book.title}"/>
+                    <h:outputText value="#{bookBB.book.name}"/>
                 </p:column>
 
                 <p:column headerText="Year">
-                    <h:outputText value="#{book.publicationyear}"/>
+                    <h:outputText value="#{bookBB.book.year}"/>
                 </p:column>
 
                 <p:column headerText="Author">
-                    <h:outputText value="#{book.author}"/>
+                    <h:outputText value="#{bookBB.book.author}"/>
                 </p:column>
 
                 <p:column headerText="Category">
-                    <h:outputText value="#{book.genre}"/>
+                    <h:outputText value="#{bookBB.book.category}"/>
                 </p:column>
 
                 <p:column headerText="Price">
-                    <h:outputText value="$#{book.price}"/>
+                    <h:outputText value="$#{bookBB.book.price}"/>
                 </p:column>
 
                 <p:column style="width:100px;text-align: center">
                     <p:commandButton icon="fa fa-pencil" update=":form:bookEdit" oncomplete="PF('editDialog').show()">
-                        <f:setPropertyActionListener value="#{book}" target="#{bookBB.selectedBook}"/>
+                        <f:setPropertyActionListener value="#{bookBB.book}" target="#{bookBB.selectedBook}"/>
                     </p:commandButton>
                     <p:commandButton action="#{bookBB.deleteBook(book)}" icon="fa fa-trash"></p:commandButton>
                 </p:column>
@@ -57,15 +57,15 @@
                 <p:outputPanel id="bookEdit" style="text-align:center;">
                     <p:panelGrid columns="2" rendered="#{not empty bookBB.selectedBook}" columnClasses="label,value">
                         
-                        <h:outputText value="Name: " /><p:inputText value="#{bookBB.selectedBook.title}" />
+                        <h:outputText value="Name: " /><p:inputText value="#{bookBB.selectedBook.name}" />
 
-                        <h:outputText value="Category: " /><p:inputText value="#{bookBB.selectedBook.genre}" />
+                        <h:outputText value="Category: " /><p:inputText value="#{bookBB.selectedBook.category}" />
 
                         <h:outputText value="Author: " /><p:inputText value="#{bookBB.selectedBook.author}"/>
 
                         <h:outputText value="Price: $" /><p:inputText value="#{bookBB.selectedBook.price}" />
 
-                        <h:outputText value="Year: " /><p:inputText value="#{bookBB.selectedBook.publicationyear}" />
+                        <h:outputText value="Year: " /><p:inputText value="#{bookBB.selectedBook.year}" />
                         
                     </p:panelGrid>
 

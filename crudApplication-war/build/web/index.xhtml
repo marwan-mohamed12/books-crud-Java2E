@@ -8,23 +8,51 @@
         <title>Books</title>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <style>
+            .responsive-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1em;
+            }
+            .center-align {
+                text-align: center;
+            }
+            
+            .margin-rem {
+                margin: 0 2rem;
+            }
+            
+        </style>
     </h:head>
     
     <h:body>
-        <h1>Books Crud</h1>
-        <h:form>
-            <h:panelGrid columns="12" cellpadding="5">
-                <h:outputText value="Name" /><p:inputText value="#{bookBB.book.name}"/>
-                <h:outputText value="Author " /><p:inputText value="#{bookBB.book.author}" />
-                <h:outputText value="Category " /><p:inputText value="#{bookBB.book.category}"/>
-                <h:outputText value="Year" /><p:inputText value="#{bookBB.book.year}"/>
-                <h:outputText value="Price " /><p:inputText value="#{bookBB.book.price}"/>
-                <p:commandButton value="Add" icon="pi pi-check" action="#{bookBB.add()}"/>
+        <h1 class="center-align">Books CRUD</h1>
+        
+        <h:form styleClass="margin-rem">
+            <h:panelGrid columns="2" styleClass="responsive-grid" cellpadding="5">
+                <h:outputText value="Name" />
+                <p:inputText value="#{bookBB.book.name}" style="width: 100%;" />
+                
+                <h:outputText value="Author" />
+                <p:inputText value="#{bookBB.book.author}" style="width: 100%;" />
+                
+                <h:outputText value="Category" />
+                <p:inputText value="#{bookBB.book.category}" style="width: 100%;" />
+                
+                <h:outputText value="Year" />
+                <p:inputText value="#{bookBB.book.year}" style="width: 100%;" />
+                
+                <h:outputText value="Price" />
+                <p:inputText value="#{bookBB.book.price}" style="width: 100%;" />
+                
+                <p:commandButton value="Add" icon="pi pi-check" action="#{bookBB.add()}" styleClass="center-align" />
             </h:panelGrid>
         </h:form>
 
         <h:form id="form">
-            <p:dataTable value="#{bookBB.getAllBooks()}" var="book" style="margin: 2em;" rowKey="#{book.id}">
+            <p:dataTable value="#{bookBB.getAllBooks()}" var="book" style="margin: 2em;" rowKey="#{book.id}" 
+                        paginator="true" rows="5" styleClass="responsive-table">
+                
                 <p:column headerText="Name">
                     <h:outputText value="#{book.name}"/>
                 </p:column>
@@ -46,26 +74,29 @@
                 </p:column>
 
                 <p:column style="width:100px;text-align: center">
-                    <p:commandButton icon="fa fa-pencil" update=":form:bookEdit" oncomplete="PF('editDialog').show()">
-                        <f:setPropertyActionListener value="#{bookBB.book}" target="#{bookBB.selectedBook}"/>
-                    </p:commandButton>
+                    <p:commandButton icon="fa fa-pencil" update=":form:bookEdit" oncomplete="PF('editDialog').show()" />
                     <p:commandButton action="#{bookBB.deleteBook(book)}" icon="fa fa-trash"></p:commandButton>
                 </p:column>
             </p:dataTable>
 
             <p:dialog header="Edit Book" widgetVar="editDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
                 <p:outputPanel id="bookEdit" style="text-align:center;">
-                    <p:panelGrid columns="2" rendered="#{not empty bookBB.selectedBook}" columnClasses="label,value">
+                    <p:panelGrid columns="2" styleClass="responsive-grid" columnClasses="label,value">
                         
-                        <h:outputText value="Name: " /><p:inputText value="#{bookBB.selectedBook.name}" />
+                        <h:outputText value="Name:" />
+                        <p:inputText value="#{bookBB.selectedBook.name}" style="width: 100%;" />
 
-                        <h:outputText value="Category: " /><p:inputText value="#{bookBB.selectedBook.category}" />
+                        <h:outputText value="Category:" />
+                        <p:inputText value="#{bookBB.selectedBook.category}" style="width: 100%;" />
 
-                        <h:outputText value="Author: " /><p:inputText value="#{bookBB.selectedBook.author}"/>
+                        <h:outputText value="Author:" />
+                        <p:inputText value="#{bookBB.selectedBook.author}" style="width: 100%;" />
 
-                        <h:outputText value="Price: $" /><p:inputText value="#{bookBB.selectedBook.price}" />
+                        <h:outputText value="Price: $" />
+                        <p:inputText value="#{bookBB.selectedBook.price}" style="width: 100%;" />
 
-                        <h:outputText value="Year: " /><p:inputText value="#{bookBB.selectedBook.year}" />
+                        <h:outputText value="Year:" />
+                        <p:inputText value="#{bookBB.selectedBook.year}" style="width: 100%;" />
                         
                     </p:panelGrid>
 
@@ -77,5 +108,3 @@
 
     </h:body>
 </html>
-
-

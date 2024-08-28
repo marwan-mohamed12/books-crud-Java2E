@@ -24,25 +24,25 @@
         </h:form>
 
         <h:form id="form">
-            <p:dataTable value="#{bookBB.getAllBooks()}" var="book" style="margin: 2em;" rowKey="#{bookBB.book.id}">
+            <p:dataTable value="#{bookBB.getAllBooks()}" var="book" style="margin: 2em;" rowKey="#{book.id}">
                 <p:column headerText="Name">
-                    <h:outputText value="#{bookBB.book.name}"/>
+                    <h:outputText value="#{book.name}"/>
                 </p:column>
 
                 <p:column headerText="Year">
-                    <h:outputText value="#{bookBB.book.year}"/>
+                    <h:outputText value="#{book.year}"/>
                 </p:column>
 
                 <p:column headerText="Author">
-                    <h:outputText value="#{bookBB.book.author}"/>
+                    <h:outputText value="#{book.author}"/>
                 </p:column>
 
                 <p:column headerText="Category">
-                    <h:outputText value="#{bookBB.book.category}"/>
+                    <h:outputText value="#{book.category}"/>
                 </p:column>
 
                 <p:column headerText="Price">
-                    <h:outputText value="$#{bookBB.book.price}"/>
+                    <h:outputText value="$#{book.price}"/>
                 </p:column>
 
                 <p:column style="width:100px;text-align: center">

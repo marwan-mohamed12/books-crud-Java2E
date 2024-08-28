@@ -40,8 +40,6 @@ public class bookBB implements Serializable {
         this.book = book;
     }
     
-    
-    
     public Book getSelectedBook() {
         return selectedBook;
     }
@@ -50,8 +48,6 @@ public class bookBB implements Serializable {
         this.selectedBook = selectedBook;
     }
 
-    
-    
     public String add() {
         bookService.createBook(book);
         return "index.xhtml?faces-redirect=true";

@@ -31,7 +31,6 @@ public class bookBB implements Serializable {
     void init() {
         book = new Book();
     }
-    
 
     public Book getBook() {
         return book;
@@ -65,7 +64,7 @@ public class bookBB implements Serializable {
     }
     
     public String updateBook() {
-        bookService.updateBook(book);
+        bookService.updateBook(selectedBook);
         return "index.xhtml?faces-redirect=true";
     }
     
